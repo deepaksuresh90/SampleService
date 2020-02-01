@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Anupama\\source\\repos\\profile_app\\profile_app\\profile_app.csproj": {}
+    "C:\\Users\\Anupama\\Documents\\GitHub\\SampleService\\profile_app\\profile_app\\profile_app.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Anupama\\source\\repos\\profile_app\\profile_app\\profile_app.csproj": {
+    "C:\\Users\\Anupama\\Documents\\GitHub\\SampleService\\profile_app\\profile_app\\profile_app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Anupama\\source\\repos\\profile_app\\profile_app\\profile_app.csproj",
+        "projectUniqueName": "C:\\Users\\Anupama\\Documents\\GitHub\\SampleService\\profile_app\\profile_app\\profile_app.csproj",
         "projectName": "profile_app",
-        "projectPath": "C:\\Users\\Anupama\\source\\repos\\profile_app\\profile_app\\profile_app.csproj",
+        "projectPath": "C:\\Users\\Anupama\\Documents\\GitHub\\SampleService\\profile_app\\profile_app\\profile_app.csproj",
         "packagesPath": "C:\\Users\\Anupama\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Anupama\\source\\repos\\profile_app\\profile_app\\obj\\",
+        "outputPath": "C:\\Users\\Anupama\\Documents\\GitHub\\SampleService\\profile_app\\profile_app\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Anupama\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,6 +38,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[3.1.1, )"
