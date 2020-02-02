@@ -83,6 +83,24 @@ namespace profile_app.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult GetProfileBySearch(string name)
+        {
+            IEnumerable<profile> Entity = dbProfile.Profiles.Where(x => x.FullName.StartsWith(name));
+            if (Entity == null)
+            {
+                return NotFound("Unable to find the Item");
+
+            }
+            else
+            {
+
+                return Ok(Entity);
+            }
+        }
+
+
         // POST: api/DbProfile
         [HttpPost]
         public IActionResult PostProfile([FromBody] profile profile_info)
