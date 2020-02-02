@@ -30,6 +30,9 @@ namespace profile_app.Controllers
         // GET: api/DbProfile/GetAll
         //Attribute routing
         [HttpGet("[action]")]
+
+        /*In post man testing turn off send no-cache header, else this method will get hit for getting latest response*/
+        [ResponseCache(Duration =60,Location =ResponseCacheLocation.Any)]
         public IActionResult GetAllBySort(string sort)
         {
             IQueryable<profile> p;
