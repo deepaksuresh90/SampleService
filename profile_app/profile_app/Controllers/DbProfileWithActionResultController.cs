@@ -27,15 +27,47 @@ namespace profile_app.Controllers
             dbProfile = dbProf;
         }
 
-        // GET: api/DbProfile
-        [HttpGet]
-        public IActionResult GetAll()
+        // GET: api/DbProfile/GetAll
+        //Attribute routing
+        [HttpGet("[action]")]
+        public IActionResult GetAllBySort(string sort)
         {
-            return  Ok(dbProfile.Profiles);
+            IQueryable<profile> p;
+            switch (sort)
+            {
+                case "asc":
+                   p = dbProfile.Profiles.OrderBy(x => x.FullName);
+                    break;
+                case "dec":
+                    p = dbProfile.Profiles.OrderByDescending(x => x.FullName);
+                    break;
+                default:
+                    p = dbProfile.Profiles;
+                    break;
+            }
+            return  Ok(p);
         }
 
+        // GET: api/DbProfile/GetAll
+        //Attribute routing
+        [HttpGet("[action]")]
+        public IActionResult GetAllByPageNumber(int? pageNumber,int? NumberOfRecordsPerPage)
+        {
+            IEnumerable<profile> p = dbProfile.Profiles;
+
+            var currentPageNumber = pageNumber ?? 1;
+            var TotalNumberOfRecordsPerPage = NumberOfRecordsPerPage ?? 5;
+
+            /*Skip and take Algorithm for paging*/
+
+            return Ok(p.Skip((currentPageNumber - 1)* TotalNumberOfRecordsPerPage).Take(TotalNumberOfRecordsPerPage));
+          
+        }
+
+
         // GET: api/DbProfile/5
-        [HttpGet("{id}", Name = "GetById")]
+        // [HttpGet("{id}", Name = "GetById")]
+        [HttpGet("[action]/{id}")]
         public IActionResult GetProfile(int id)
         {
             var Entity = dbProfile.Profiles.Find(id);

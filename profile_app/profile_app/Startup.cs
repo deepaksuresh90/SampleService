@@ -50,7 +50,16 @@ namespace profile_app
 
             app.UseAuthorization();
 
+            /*Code First Migration*/
+            /*The below line will ensure Database and tables are created from Model class*/
+            /*Later if modifying this by adding a new property in the model class will cause error*/
+            /*This will be applicable if the model/Table is fixed,Later there is no alteration to that*/
             db.Database.EnsureCreated();
+
+            /*This will be applicable if the model/Table is not fixed,Later there is modification allowed to that*/
+            //db.Database.Migrate();
+
+
 
             app.UseEndpoints(endpoints =>
             {
