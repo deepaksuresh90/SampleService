@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using profile_app.Data;
@@ -11,6 +12,7 @@ namespace profile_app.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class DbProfileWithActionResultController : ControllerBase
     {
 
@@ -88,6 +90,7 @@ namespace profile_app.Controllers
 
         [HttpGet]
         [Route("[action]")]
+        [AllowAnonymous]
         public IActionResult GetProfileBySearch(string name)
         {
             IEnumerable<profile> Entity = dbProfile.Profiles.Where(x => x.FullName.StartsWith(name));
@@ -120,6 +123,11 @@ namespace profile_app.Controllers
         public IActionResult PutProfile(int id, [FromBody] profile profile_info)
         {
             var Entity = dbProfile.Profiles.Find(id);
+
+            /*Get the Use ID  token from the authorization
+             
+             var userId= User.Clims.FirstOrDefault(x=>x.Type==ClaimTypes.NameIdentifier).Value
+             */
 
             if (Entity == null)
             {

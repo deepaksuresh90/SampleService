@@ -13,6 +13,7 @@ namespace profile_app.Model
         //[Range(1, 100, ErrorMessage = "Price must be between $1 and $100")]
         //[DataType(DataType.Date)]
         // [DisplayFormat(DataFormatString = "{0:d}")]
+        //[JsonIgnore] -->This annotation willnot show the field in response
         public int Id { get; set; }
 
 

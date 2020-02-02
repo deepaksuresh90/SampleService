@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,27 @@ namespace profile_app
             /*This line added for content negotiation to xml*/
             /*Nuget package : Microsoft.AspnetCore.MVC.Formatters.xml*/
             services.AddMvc().AddXmlSerializerFormatters();
+
+
+            /*Response Caching used to store the response in proxy server for sometime-(timeout)
+             * Once timeout it will clear the cache and send the request to actual server
+             * Nuget package -Aspnet.core.ResponseCache
+             * */
+            services.AddResponseCaching();
+
+            /*Adding authentication and autherisation using auth0 portal*/
+            // 1. Add Authentication Services
+            /*Nuget for auth : Microsoft.AspnetCore.Authentication.JwtBearer*/
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://profileapi.au.auth0.com/";
+                options.Audience = "https://localhost:5001/";
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,9 +79,17 @@ namespace profile_app
             db.Database.EnsureCreated();
 
             /*This will be applicable if the model/Table is not fixed,Later there is modification allowed to that*/
+            /*Also In packaage manager console tools->pkg manager console*/
+            /*Add-Migration UserFieldAdded*/
+            /*update-database*/
             //db.Database.Migrate();
 
 
+            /*response caching in proxy server*/
+            app.UseResponseCaching();
+
+            // 2. Enable authentication middleware
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
