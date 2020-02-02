@@ -29,6 +29,11 @@ namespace profile_app
         {
             services.AddControllers();
             services.AddDbContext<ProfileDbContext>(options=>options.UseSqlServer(@"Data Source=DESKTOP-OA1F9BH;Initial Catalog=ProfileDb; User Id=sa;Password=1234"));
+            
+            /*Media Type formatters*/
+            /*This line added for content negotiation to xml*/
+            /*Nuget package : Microsoft.AspnetCore.MVC.Formatters.xml*/
+            services.AddMvc().AddXmlSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

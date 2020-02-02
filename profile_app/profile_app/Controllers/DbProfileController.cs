@@ -21,7 +21,7 @@ namespace profile_app.Controllers
         }
 
         // GET: api/DbProfile
-        [HttpGet]
+        [HttpGet( Name = "GetAppByIdV1")]
         public IEnumerable<profile> Get()
         {
             return dbProfile.Profiles;
